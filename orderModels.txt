@@ -1,0 +1,229 @@
+#################################################################################
+#################################################################################
+#################################################################################
+active models.py
+1-add from django.db import models
+2-add from django.utils import timezone
+3-set address apps in settings.py => Ex: 'apps.blog.apps.BlogConfig'
+4-change name name class in file apps.py => Ex: name='apps.blog'
+
+
+#################################################################################
+#################################################################################
+#################################################################################
+Field Types:
+========================
+text:
+========================
+1-CharField()           => bare dadane maghadir text hast
+2-SlugField()           => mamolan bare save kardan url page ha morde estefade garar migire
+3-TextField()           => bare text haye bedone mahdodiyat
+4-EmailField()          => baraye save kardane email
+5-URLField()            => baraye save kardane address interneti
+6-FilePathField()       => baraye save kardane address fileha
+7-JSONField()           => baraye save kardane data haye jsoni
+
+========================
+number:
+========================
+1-IntegerField()        => dadane adad sahih
+2-SmallIntegerField()   => dadane adad sahih kochak
+3-PositiveInegerField() => dadane adad sahih manfi
+4-FloatField()          => dadane adad ashari
+5-DecimalField()        => dadane adad ashari ba momayeze moshakhas
+
+========================
+automatic field:
+========================
+1-AutoField()           => tolid automatic yek meghdar adad
+2-BigAutoField()        => tolid automatic yek meghdar bozorgtar adad
+3-UUIDField()           => tolid automatic yek meghdar text
+
+========================
+boolean:
+========================
+1-BooleanField()        => gereftane yek meghdar 0,1
+
+========================
+save file
+========================
+1-ImageField()          => save pixel bit image
+2-FileField()           => save ever bit file
+
+========================
+time
+========================
+1-DateField()           => save date (tarikh)
+2-TimeField()           => save time (saat)
+3-DateTimeField()       => save time and date
+
+========================
+list of constant
+========================
+one: create list of constant value
+two: ba tavajo be noe item select az list of constant ba propertiy choices
+
+
+
+
+
+#################################################################################
+#################################################################################
+#################################################################################
+Field Options:
+max_length          => beshtrim hade karekter [int]
+default             => meghdare pish farz [ever]
+Null                => Ture yani mitoe in item ba null por beshe [Bool]
+blank               => item mitone khali bashe [Bool]
+db_column           => set name baraye name soton table database [str]
+help_text           => text komaki baraye item  [str]
+primary_key         => kelid asli
+editable            => default True : record table ghabele edit bashe
+error_messages      => khate ke agar meghdare dade shode be item dorost nabashe  [str]
+verbose_name        =>1-age underline(_) gozashte bashim baray slug ha mikone dash(-)
+                      2-emkan barchasb gozari ro mide
+                      3-dadane name be item haye yek record dar panel admin [str]
+validators          => list az shorot etebarsanji(function and string check) 
+Unique              => tabdil kardan on item be unique beshe 
+auto_now_add        => takmil kardan zaman dar halat add [Bool]
+auto_now            => takmil kardan zaman dar halat update [Bool]
+choices             => select of list constant or ...
+
+#################################################################################
+#################################################################################
+#################################################################################
+Relationship Fields:
+relation:
+    1-1 : yek be yek            
+    1-N : yek be chand
+    M-N : chand be chand
+1-N:
+EX:
+auther  <=>  article
+1       <=>  N
+1       <=>  1
+dar taraf N:
+=> ForeignKey
+    Field Options:
+        on_delete   >>> entekhabe inke bad az delete shodan 
+                        nemone class aval ontarafe relation 
+                        chekar kone nemonesh ro
+                            1- models.SET_NULL :: jaye nemone null mishe
+                            2- models.SET_DEFAULT,models.default='***'  :: jaye nemone null mishe
+                            3- models.CASCADE :: khode nemone aval delete mishe
+    parametr:
+        1-name class relation
+        2-on_delete
+        3-...
+
+1-1:
+EX:
+cheifEditor <=> Publication
+1           <=> 1
+1           <=> 1
+NOTE: dar yek taraf bayad primary_key taeein beshe
+dar yek do taraf:
+=> OneToOneField
+    Field Options:
+        on_delete
+
+    parametr:
+        1-name class relation
+        2-on_delete
+        3-primary_key        
+
+
+M-N:
+EX:
+article <=> Publication
+1           <=> M
+N           <=> 1
+NOTE: dar yek taraf bayad primary_key taeein beshe
+dar yek do taraf:
+=> OneToOneField
+    Field Options:
+        on_delete
+
+    parametr:
+        1-name class relation
+        2-on_delete
+        3-primary_key        
+
+
+
+
+
+DBMS order:
+1-sakhtare database:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'mysql.connector.django',
+            'NAME': 'dbshop',
+            'USER':'root',
+            'PASSWORD':'123456',
+            'HOST':'localhost',
+            'PORT':'3306',
+        }
+    }
+
+2-sakhte file jahate migrate    => makemigrations
+    * age bekhayem yek application ro migrate konim : makemigrations nameApps
+
+3-emal dar database             => migrate
+
+
+
+
+
+
+
+
+
+ORM(Object Relational Mapper):
+use ORM in views : from apps.nameApp.models import nameClass
+                   from .models import nameClass
+
+bad mishe ba orderhay ORM az tarigh context data bord
+dakhele file haye html
+* run shell in django : python manage.py shell
+1-Class.objects.all()           => select: show all record in database
+2-create record                 => create1: tarif yek nemone az class made nazar
+3-nemone.save()                 => create2: save record dar database
+4-Class.objects.get(field='')   => select where : age namone peyda nakone error mide
+5-Class.objects.filter(field='')=> select where : error nadare
+    field__gt= bozorgtar
+    field__gte= >=
+    field__lt= kochaktar
+    field__lte= <=
+6-namone.delete()               => delete : baraye delete kardan
+
+
+#################################################################################
+#################################################################################
+#################################################################################
+work order in side database
+
+Meta Class:
+    dar dakhele class nemone ghara migire
+
+
+Field :
+    db_table                => set name for table models in database
+    ordering                => ordering table in database
+    verbose_name            => change name class models in panel admin
+    verbose_name_plural     => change sum name class models in panel admin
+    constraints             => if in table input for database
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,2 @@
+admin.site.site_header  =>  title header admin page
+admin.site.index_title  =>  message under header
