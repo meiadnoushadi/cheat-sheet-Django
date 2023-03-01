@@ -5,57 +5,107 @@ install django:
 run server:
 	* - django-admin runserver
 	* - py manago.py runserver (age dar dakhele base directory bashim)
-
 --------------------------------------
 structure:
 	apps
 	templates(barye zaher apps ha)
 	config
+	static
+	meida
 --------------------------------------
 apps:
 	* create app : django-admin startapp <nameapp>
 	-----------------
 	migrations:
-
 	-----------------
 	admin.py:
-
 	-----------------
 	apps.py:
-
 	-----------------
 	models.py:
 		ertebat ba database
-
 	-----------------
 	views.py:
 		farmanha
-		##########
+		========
 		imports:
-			from django.http import HttpResponse
+			** from django.http import HttpResponse
 			=> HttpResponse yeki az sade trim input ha hast
+			   Ex:
+			   		return HttpResponse(template or "code")
+
+			** from django.template improt loader
+			=> in method yeki az sade tarim halat haye hast ke yek 
+			   template ro bargozari mikonim
+			   Ex:
+					loader.get_template('address'.render()) -> az base directory ke be template settings
+													  dadi miyad mikhone
 	-----------------
 	urls.py:
 		baraye url haye dakhele har app
+		Note: barye estefade az views ha dar urls ha bayad views ha
+			  ro import konim
+		========
+		imports:
+			** from django.urls import path
+			=> barye inke urlspattern=[] ro beshnase
+			   * path('urlsName',method and class views)
 --------------------------------------
 templates:
-
-
-
-
+	dar in file age khastime ke ham front va ham back ro ba django
+	bezanim miyayem va bar assasse apps ha folder misazim va template haye
+	har app ro dakhele on gharar midim
 --------------------------------------
 config:
 	-----------------
-	settings.py
+	settings.py:
+		set templates directory:
 
+			=> str(BASE_DIR.joinpath('templates/')),
+		
+		set media and static:
+
+			STATIC_URL = '/static/'
+			STATICFILES_DIRS = (BASE_DIR.joinpath('static/'),)
+
+			MEDIA_URL = '/media/'
+			MEDIA_ROOT = BASE_DIR.joinpath('media/')
+
+		set Database:
+
+			Note: install -> pip install mysql-connector-python
+			DATABASES = {
+			    'default': {
+			        'ENGINE': 'mysql.connector.django',
+			        'NAME': 'nameDatabase',
+			        'USER': 'nameUser',
+			        'PASSWORD' : 'passwordUser',
+			        'HOST':'localhost',
+			        'PORT':'3306',
+			    }
+			}
 	-----------------
 	urls.py:
 		barye urls haye tamame project
-		note: barye estefade az views ha dar urls ha bayad views ha
-			  ro import konim
-
-		* path('urlsName',method and class views)
-
-
-
-
+		========
+		improt:
+			** from django.urls import include
+			path('urlsName',method and class views)
+			path('urlsName',include('address urls app'))
+--------------------------------------
+static :
+	-----------------
+	js:
+		file haye javascript 
+	-----------------
+	css:
+		file haye css
+--------------------------------------
+meida :
+	-----------------
+	images:
+	-----------------
+	videos:
+	-----------------
+	sounds:
+--------------------------------------
