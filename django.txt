@@ -1,0 +1,61 @@
+install django:
+	1- create directory
+	2- pip install django
+--------------------------------------
+run server:
+	* - django-admin runserver
+	* - py manago.py runserver (age dar dakhele base directory bashim)
+
+--------------------------------------
+structure:
+	apps
+	templates(barye zaher apps ha)
+	config
+--------------------------------------
+apps:
+	* create app : django-admin startapp <nameapp>
+	-----------------
+	migrations:
+
+	-----------------
+	admin.py:
+
+	-----------------
+	apps.py:
+
+	-----------------
+	models.py:
+		ertebat ba database
+
+	-----------------
+	views.py:
+		farmanha
+		##########
+		imports:
+			from django.http import HttpResponse
+			=> HttpResponse yeki az sade trim input ha hast
+	-----------------
+	urls.py:
+		baraye url haye dakhele har app
+--------------------------------------
+templates:
+
+
+
+
+--------------------------------------
+config:
+	-----------------
+	settings.py
+
+	-----------------
+	urls.py:
+		barye urls haye tamame project
+		note: barye estefade az views ha dar urls ha bayad views ha
+			  ro import konim
+
+		* path('urlsName',method and class views)
+
+
+
+
